@@ -10,7 +10,7 @@ class PaginatedListView<T> extends StatefulWidget {
   ///
   /// [T] defines the type of data of the list
   const PaginatedListView({
-    super.key,
+    Key? key,
     required this.onFetch,
     required this.itemBuilder,
     this.onLoadStart,
@@ -20,7 +20,7 @@ class PaginatedListView<T> extends StatefulWidget {
     this.separator,
     this.padding,
     this.physics,
-  });
+  }) : super(key: key);
 
   /// Run the request with the current page as a parameter
   final Future<List<T>> Function(int) onFetch;

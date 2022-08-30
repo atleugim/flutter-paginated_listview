@@ -1,11 +1,11 @@
 name: paginated_listview
 description: A simple ListView to handle pagination to your API queries or whatever you want to do :)
-version: 0.0.1
+version: 0.0.1+1
 maintainer: Miguel Vega (@atleugim)
 homepage: https://github.com/atleugim/flutter-paginated_listview
 
 environment:
-  sdk: ">=2.17.6 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
