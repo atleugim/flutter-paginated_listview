@@ -1,0 +1,17 @@
+name: paginated_listview
+description: A new Flutter package project.
+version: 0.0.1
+maintainer: Miguel Vega (@atleugim)
+homepage: https://github.com/atleugim/ipapico-flutter
+
+environment:
+  sdk: ">=2.17.6 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
