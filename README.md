@@ -1,39 +1,102 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# paginated_listview
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+![Pub Version](https://img.shields.io/pub/v/paginated_listview?color=light-green)
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+A simple ListView to handle pagination to your API queries or whatever you want to do :)
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+## Usage with Flutter Apps
 
-## Features
+```Dart
+class ExampleItem extends StatelessWidget {
+  const ExampleItem({Key? key, required this.message}) : super(key: key);
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+  final String message;
 
-## Getting started
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Text(
+        message,
+        style: const TextStyle(
+          color: Colors.black,
+          fontSize: 14.0,
+          fontWeight: FontWeight.w400,
+        ),
+      ),
+    );
+  }
+}
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
 
-## Usage
+class PaginatedExample extends StatelessWidget {
+  const PaginatedExample({Key? key}) : super(key: key);
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+  List<String> _generateList(int page, {int length = 10}) {
+    if (page > 5) {
+      return [];
+    }
 
-```dart
-const like = 'sample';
+    return List.generate(length, (i) => 'Page: $page | Item: ${i + 1}');
+  }
+
+  Future<List<String>> _onFetch(int p) async {
+    await Future.delayed(const Duration(seconds: 2)); // simulate fetching
+    return _generateList(p);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Flutter Paginated Listview'),
+        centerTitle: true,
+      ),
+      body: PaginatedListView<String>(
+        onFetch: (page) async => _onFetch(page),
+        initialData: _generateList(1, length: 30),
+        itemBuilder: (m) => ExampleItem(message: m),
+        separator: const Divider(),
+        onLoadStart: () => LoadingOverlay.of(context).show(),
+        onLoadEnd: () => LoadingOverlay.of(context).hide(),
+      ),
+    );
+  }
+}
 ```
 
-## Additional information
+## The parameters
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+```Dart
+/// [T] defines the type of data of the list
+const PaginatedListView<T>()
+
+
+/// Run the request with the current page as a parameter
+final Future<List<T>> Function(int) onFetch;
+
+/// The Widget to be built in the list view
+/// this function return an item of type [T] to receive in your own [Widgets]
+final Function(T) itemBuilder;
+
+/// Optional, Initial list of data to be shown, default is []
+final List<T> initialData;
+
+/// Optional, should shirdWrap the list?
+final bool shrinkWrap;
+
+/// Optional, the [Widget] to be built as separator
+final Widget? separator;
+
+/// Optional, so you can handle when fetching start
+final void Function()? onLoadStart;
+
+/// Optional, so you can handle when fetching end
+final void Function()? onLoadEnd;
+
+/// Optional, set padding of the listview
+final EdgeInsetsGeometry? padding;
+
+/// Optional, set scroll physics of the listview
+final ScrollPhysics? physics;
+```

@@ -7,6 +7,7 @@ export 'paginated_listview.dart';
 class PaginatedListView<T> extends StatefulWidget {
   /// Creates a paginated listview builder with handling of all items
   /// and when no more items on response
+  ///
   /// [T] defines the type of data of the list
   const PaginatedListView({
     super.key,
@@ -24,20 +25,29 @@ class PaginatedListView<T> extends StatefulWidget {
   /// Run the request with the current page as a parameter
   final Future<List<T>> Function(int) onFetch;
 
-  /// The [Widget] to be built in the list view
+  /// The Widget to be built in the list view
+  /// this function return an item of type [T] to receive in your own [Widgets]
   final Function(T) itemBuilder;
 
-  /// Initial [List] of data to be shown
+  /// Optional, Initial list of data to be shown, default is []
   final List<T> initialData;
 
-  /// Initial [List] of data to be shown
+  /// Optional, should shirdWrap the list?
   final bool shrinkWrap;
 
-  /// The [Widget] to be built as separator
+  /// Optional, the [Widget] to be built as separator
   final Widget? separator;
+
+  /// Optional, so you can handle when fetching start
   final void Function()? onLoadStart;
+
+  /// Optional, so you can handle when fetching end
   final void Function()? onLoadEnd;
+
+  /// Optional, set padding of the listview
   final EdgeInsetsGeometry? padding;
+
+  /// Optional, set scroll physics of the listview
   final ScrollPhysics? physics;
 
   @override

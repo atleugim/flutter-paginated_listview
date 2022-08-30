@@ -2,7 +2,7 @@ name: paginated_listview
 description: A new Flutter package project.
 version: 0.0.1
 maintainer: Miguel Vega (@atleugim)
-homepage: https://github.com/atleugim/ipapico-flutter
+homepage: https://github.com/atleugim/flutter-paginated_listview
 
 environment:
   sdk: ">=2.17.6 <3.0.0"
