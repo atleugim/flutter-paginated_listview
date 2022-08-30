@@ -1,5 +1,5 @@
 name: paginated_listview
-description: A new Flutter package project.
+description: A simple ListView to handle pagination to your API queries or whatever you want to do :)
 version: 0.0.1
 maintainer: Miguel Vega (@atleugim)
 homepage: https://github.com/atleugim/flutter-paginated_listview
