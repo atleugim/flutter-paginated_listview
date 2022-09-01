@@ -99,7 +99,7 @@ class _PaginatedListViewState<T> extends State<PaginatedListView<T>> {
     return ListView.separated(
       controller: _scrollController,
       itemCount: items.length,
-      shrinkWrap: true,
+      shrinkWrap: widget.shrinkWrap,
       padding: widget.padding,
       physics: widget.physics,
       itemBuilder: (context, index) {
